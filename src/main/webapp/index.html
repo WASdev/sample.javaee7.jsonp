@@ -1,0 +1,145 @@
+<!-- 
+/*
+ * COPYRIGHT LICENSE: This information contains sample code provided in source
+ * code form. You may copy, modify, and distribute these sample programs in any 
+ * form without payment to IBM for the purposes of developing, using, marketing 
+ * or distributing application programs conforming to the application programming 
+ * interface for the operating platform for which the sample code is written. 
+ * 
+ * Notwithstanding anything to the contrary, IBM PROVIDES THE SAMPLE SOURCE CODE 
+ * ON AN "AS IS" BASIS AND IBM DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, 
+ * BUT NOT LIMITED TO, ANY IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY, 
+ * SATISFACTORY QUALITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND ANY WARRANTY OR 
+ * CONDITION OF NON-INFRINGEMENT. IBM SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR
+ * OPERATION OF THE SAMPLE SOURCE CODE. IBM HAS NO OBLIGATION TO PROVIDE
+ * MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS OR MODIFICATIONS TO THE SAMPLE
+ * SOURCE CODE.
+ * 
+ * (C) Copyright IBM Corp. 2015.
+ * 
+ * All Rights Reserved. Licensed Materials - Property of IBM.  
+ */
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"></meta>
+	<title>JSONP WAS Classic tests</title>
+    <style>
+.frm1{padding: 15px;background-color: #9666af; margin-bottom: 5px;}
+.frm2{padding-left: 25px; font-family: Verdana; color: #440055; margin-top: 15px;}
+.big{font-size: 26px; color: white;}
+.notice{padding-top: px; margin-top: 0px; margin-left: 0px; font-family: "Times New Roman"; font-size: 14px; color: #7766aa; color: black;}
+.frm{margin-top: 20px;padding: 5px; padding-top: 2px; padding-bottom: 2px; background-color: #ffffff; z-index: -2; margin-bottom: 40px; border-color: white; border-style: solid; border-width: 1px;}
+.small{font-size: 12px;}
+button, select{padding: 5px; padding-left: 20px; padding-right: 20px; margin:10px; width: 270px}
+    </style>  
+    <script>
+var impl = [];
+var disableBtn = [];
+var lastSel = "1";
+function init(){
+
+  impl[0] = "";
+  impl[1] = "JsonReaderFromReaderTest";
+  impl[2] = "JsonReaderFromStreamTest";
+  impl[3] = "JsonParserFromReaderTest";
+  impl[4] = "JsonParserFromStreamTest";
+  impl[5] = "DOMGeneratorTest";
+  impl[6] = "StreamingGeneratorTest";
+  
+  disableBtn[0] = false;
+  disableBtn[1] = false;
+  disableBtn[2] = false;
+  disableBtn[3] = false;
+  disableBtn[4] = false;
+  disableBtn[5] = false;
+  disableBtn[6] = false;
+  
+  var elem = document.getElementById("currentTestID");
+  elem.selectedIndex = lastSel;
+  for(var i = 1; i < elem.options.length; i++){
+    elem.options[i].selected = false;
+  }
+  elem.options[lastSel].selected = true;
+  buildAndDisplayURLS();
+  document.addEventListener('change',buildAndDisplayURLS);
+} 
+
+function buildAndDisplayURLS(){
+  var sel = document.getElementById("currentTestID");
+  lastSel = sel.selectedIndex;
+  var test = sel.options[sel.selectedIndex].value;
+  if(test == "testSimpleObject"){
+    disableBtn[1] = true;
+    disableBtn[2] = true;
+  } 
+  else {
+    disableBtn[1] = false;
+	disableBtn[2] = false;
+  }
+  if(test == "testSimpleObjectWithTwoElements"){
+    disableBtn[3] = true;
+	disableBtn[4] = true;
+	disableBtn[5] = true;
+	disableBtn[6] = true;
+  }
+  else {
+    disableBtn[3] = false;
+	disableBtn[4] = false;
+	disableBtn[5] = false;
+	disableBtn[6] = false;
+  }
+  
+  for(var i = 1; i < 7; i++){
+    var btn = document.getElementById("b" + i);
+	btn.disabled = disableBtn[i];
+	var urlStr = document.getElementById("url" + i);
+	if(disableBtn[i] == true)urlStr.style.color = "#cccccc";
+	else urlStr.style.color = "#440055";
+  }
+  
+  for(var i = 1; i < 7; i++){
+    var elem = document.getElementById("url" + i);
+    var lnkElem = document.getElementById("a" + i);
+    if(elem !== undefined && lnkElem !== undefined){
+      elem.innerHTML = "url: &lt;host:port&gt;/sample.javaee7.jsonp/" + impl[i] + "?test=" + test;
+      lnkElem.href = window.location.href + impl[i] + "?test=" + test;
+    }
+  }
+}
+
+    </script>
+  </head>
+  <body>
+    <div class="frm1">
+      <div class="big"> WAS Java EE 7 Sample - JSONP</div>
+    </div>
+    <div class="frm2"> 
+        <div class="small">This application has been tested with Firefox and Chrome </div>
+        <div class="small">The source code for this application can be found on: <a href="https://github.com/WASdev/">https://github.com/WASdev/</a> 
+	<div class="small"><i>Note:</i> some test + servlet combinations are not supported and will be disabled.</div>
+    </div>
+    <div class="frm2">
+    Select a test:<br/>
+      <select id="currentTestID">
+        <option value="testEmptyObject">testEmptyObject</option>
+        <option value="testSimpleObject">testSimpleObject</option>
+        <option value="testSimpleObjectWithTwoElements">testSimpleObjectWithTwoElements</option>
+        <option value="testArray">testArray</option>
+        <option value="testNestedStructure">testNestedStructure</option>
+      </select><br/>
+    Run selected test with a particular implementation:<br/>
+      <a href="JsonReaderFromReaderTest?test=testArray" id="a1"><button id="b1" type="button">JsonReaderFromReaderTest</button></a><span id="url1"></span><br/>
+      <a href="JsonReaderFromStreamTest?test=testArray" id="a2"><button id="b2" type="button">JsonReaderFromStreamTest</button></a><span id="url2"></span><br/>
+      <a href="JsonParserFromReaderTest?test=testArray" id="a3"><button id="b3" type="button">JsonParserFromReaderTest</button></a><span id="url3"></span><br/>
+      <a href="JsonParserFromStreamTest?test=testArray" id="a4"><button id="b4" type="button">JsonParserFromStreamTest</button></a><span id="url4"></span><br/>
+      <a href="DOMGeneratorTest?test=testArray" id="a5"><button id="b5" type="button">DOMGeneratorTest</button></a><span id="url5"></span><br/>
+	  <a href="StreamingGeneratorTest=testArray" id="a6"><button id="b6" type="button">StreamingGeneratorTest</button></a><span id="url6"></span><br/>
+    </div>
+  </body>
+  <script>
+init();
+  </script>
+</html>
