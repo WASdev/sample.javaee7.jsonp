@@ -39,9 +39,9 @@ To the right of each button you will see a constructed URL that will be used to 
 6. Deploy the sample into Liberty server. Right click on the project and select *Run As -> Run on Server* option. Find and select the Liberty profile server and press *Finish*.
 7. Go to: [http://localhost:9080/sample.javaee7.jsonp/](http://localhost:9080/sample.javaee7.jsonp/)
 
-## Running with Maven
+## Running with the Maven commandline
 
-This project can be build with [Apache Maven](http://maven.apache.org/). The project uses [Liberty Maven Plug-in][] to automatically download and install Liberty profile runtime from the [Liberty repository](https://developer.ibm.com/wasdev/downloads/). Liberty Maven Plug-in is also used to create, configure, and run the application on the Liberty server. 
+This project can be build with [Apache Maven](http://maven.apache.org/). The project uses the Liberty Maven Plug-in to automatically download and install Liberty profile runtime from the [Liberty repository](https://developer.ibm.com/wasdev/downloads/). Liberty Maven Plug-in is also used to create, configure, and run the application on the Liberty server. 
 
 Use the following steps to run the application with Maven:
 
@@ -50,7 +50,7 @@ Use the following steps to run the application with Maven:
     $ mvn clean install
     ```
 
-2. To run the server with the EL 3.0 application execute:
+2. To run the server with the JSONP application execute:
     ```bash
     $ mvn liberty:run-server
     ```
