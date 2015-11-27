@@ -32,8 +32,12 @@ To the right of each button you will see a constructed URL that will be used to 
 2. Create a new Liberty Profile Server.
 3. Clone this repository.
 4. Import the sample into Eclipse using *File -> Import -> Maven -> Existing Maven Projects* option.
-5. Deploy the sample into Liberty server. Right click on the project and select *Run As -> Run on Server* option. Find and select the Liberty profile server and press *Finish*.
-6. Go to: [http://localhost:9080/sample.javaee7.jsonp/](http://localhost:9080/sample.javaee7.jsonp/)
+5. Edit the server.xml file located in the Servers -> DefaultServer folder in EnterpriseExporer, use the following features:  
+        `<feature>webProfile-7.0</feature>`  
+        `<feature>localConnector-1.0</feature>`  
+        `<feature>jsonp-1.0</feature>`
+6. Deploy the sample into Liberty server. Right click on the project and select *Run As -> Run on Server* option. Find and select the Liberty profile server and press *Finish*.
+7. Go to: [http://localhost:9080/sample.javaee7.jsonp/](http://localhost:9080/sample.javaee7.jsonp/)
 
 ## Running with Maven
 
