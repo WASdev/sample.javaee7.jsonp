@@ -1,4 +1,4 @@
-# sample.javaee7.jsonp
+# sample.javaee7.jsonp [![Build Status](https://travis-ci.org/WASdev/sample.javaee7.jsonp.svg?branch=master)](https://travis-ci.org/WASdev/sample.javaee7.jsonp)
 
 JSONP follows the [JSR 353 specification](https://jcp.org/en/jsr/detail?id=353).  The sample.javaee7.jsonp sample application is comprised of 5 servlets that will parse and display JSON data using different implementations for getting the JSON code.  There is a web UI page designed to provide the user with an easier, more intuitive way to try out the JSON-P functionality.
 
