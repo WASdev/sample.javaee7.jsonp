@@ -1,8 +1,7 @@
 language: java
 matrix:
   include:
-    - jdk: oraclejdk7
     - jdk: oraclejdk8
 script:
   - mvn install
-  - travis_wait ./gradlew build
+  - ./gradlew build
