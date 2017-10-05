@@ -5,4 +5,4 @@ matrix:
     - jdk: oraclejdk8
 script:
   - mvn install
-  - ./gradlew build
+  - travis_wait ./gradlew build
