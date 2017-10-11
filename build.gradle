@@ -32,8 +32,7 @@ repositories {
 
 ext {
     // Liberty server properties
-    wlpServerName = 'LibertyProjectServer'
-    serverDirectory = "${project.buildDir}/wlp/usr/servers/${wlpServerName}"
+    serverDirectory = "${project.buildDir}/wlp/usr/servers/defaultServer"
     testServerHttpPort = 9080
     testServerHttpsPort = 9443
 
@@ -49,8 +48,7 @@ war {
 liberty {
     server{
         configFile = file("src/main/wlp/server.xml")
-        bootstrapProperties = ['appLocation': "${war.baseName}"]
-        name = 'LibertyProjectServer'
+        bootstrapProperties = ['appLocation': war.baseName]
         apps = [war]
      }
 }
